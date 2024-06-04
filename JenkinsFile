@@ -1,0 +1,29 @@
+pipeline {
+    agent { 
+        node {
+            label 'docker-agent-python'
+            }
+      }
+    triggers {
+        pollSCM '* */1 * * *'
+    }
+
+    stages {
+        stage('Test') {
+            steps {
+                echo 'Checking Pre-requisites'
+                sh '''
+                python3 --version
+                newman --version
+                pip install robotframework
+                pip install robotframework-jsonlibrary
+                robot --version
+                '''
+                echo 'Running Tests'
+                sh '''
+                robot TestingFW.robot
+                '''
+            }
+        }
+    }
+}
