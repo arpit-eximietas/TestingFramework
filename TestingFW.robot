@@ -5,8 +5,8 @@ Library           JSONLibrary
 Library           Collections
 
 *** Variables ***
-${COLLECTION}     API/FakeRESTApi.Web V1.postman_collection.json
-${ENVIRONMENT}    API/FakeRestAPI.postman_environment.json
+${COLLECTION}     PostmanCollections/FakeRESTApi.Web V1.postman_collection.json
+${ENVIRONMENT}    PostmanCollections/FakeRestAPI.postman_environment.json
 ${REPORT_PATH}    Report/HTML/report0.html
 ${JSON_REPORT_PATH}    Report/JSON/newman_report.json
 
