@@ -18,9 +18,12 @@ pipeline {
             steps{
                 script{
                     sh '''
-                        cd custom-jenkins
-                        docker build -t myjenkins-blueocean:2.452.1-1 .
-                        
+                    echo 'Checking Pre-requisites'
+                    python3 --version
+                    newman --version
+                    pip3 install robotframework --break-system-packages
+                    pip3 install robotframework-jsonlibrary --break-system-packages
+                    robot TestingFW.robot                        
                     '''
                 }
             }
