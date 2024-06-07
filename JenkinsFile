@@ -6,29 +6,16 @@ pipeline {
 
     stages {
         stage('Test') {
-            steps {
-                script {
-                    echo 'Checking Pre-requisites'
-                    sh '''
-                    python3 --version
-                    newman --version
-                    pip install robotframework
-                    pip install robotframework-jsonlibrary
-                    robot --version
-                    '''
-                    echo 'Running Tests'
-                    sh '''
-                    robot TestingFW.robot
-                    '''
+            steps{
+                script{
+                    sh('curl https://github.com/RhitamB-Eximietas/TestingFramework.git')
                 }
             }
-        }
-    }
-
-    post {
-        always {
-            archiveArtifacts artifacts: 'results/*.xml', allowEmptyArchive: true
-            publishRobotResults outputPath: 'results'
+            steps{
+                script{
+                    sh 'docker build -t myjenkins-blueocean:2.452.1-1 .'
+                }
+            }
         }
     }
 }
