@@ -8,7 +8,9 @@ pipeline {
         stage('GIT-Checkout'){
             steps{
                 script{
-                    sh('curl https://github.com/RhitamB-Eximietas/TestingFramework.git')
+                    sh'''
+                        curl https://github.com/RhitamB-Eximietas/TestingFramework.git
+                    '''
                 }
             }
         }
@@ -21,7 +23,7 @@ pipeline {
                     newman --version
                     pip3 install robotframework --break-system-packages
                     pip3 install robotframework-jsonlibrary --break-system-packages
-                    robot TestingFW.robot  
+                    robot TestingFW.robot                        
                     '''
                 }
             }
