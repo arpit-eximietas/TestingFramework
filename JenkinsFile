@@ -8,7 +8,9 @@ pipeline {
         stage('GIT-Checkout'){
             steps{
                 script{
-                    sh('curl https://github.com/RhitamB-Eximietas/TestingFramework.git')
+                    sh'''
+                        git clone https://github.com/RhitamB-Eximietas/TestingFramework.git
+                    '''
                 }
             }
         }
