@@ -17,7 +17,11 @@ pipeline {
         stage('Test') {
             steps{
                 script{
-                    sh 'docker build -t myjenkins-blueocean:2.452.1-1 .'
+                    sh '''
+                        cd custom-jenkins
+                        docker build -t myjenkins-blueocean:2.452.1-1 .
+                        
+                    '''
                 }
             }
         }
