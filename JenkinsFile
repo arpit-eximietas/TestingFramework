@@ -1,28 +1,36 @@
 pipeline {
     agent any
     triggers {
-        pollSCM '* */1 * * *'
+        pollSCM('* * * * *')
     }
 
     stages {
         stage('Test') {
             steps {
-                docker.image('robotframework/rfdocker:latest').inside {
-                    sh 'robot --outputdir results tests/'
+                script {
+                    docker.image('robotframework/rfdocker:latest').inside {
+                        echo 'Checking Pre-requisites'
+                        sh '''
+                        python3 --version
+                        newman --version
+                        pip install robotframework
+                        pip install robotframework-jsonlibrary
+                        robot --version
+                        '''
+                        echo 'Running Tests'
+                        sh '''
+                        robot --outputdir results tests/
+                        '''
+                    }
                 }
-                echo 'Checking Pre-requisites'
-                sh '''
-                python3 --version
-                newman --version
-                pip install robotframework
-                pip install robotframework-jsonlibrary
-                robot --version
-                '''
-                echo 'Running Tests'
-                sh '''
-                robot TestingFW.robot
-                '''
             }
+        }
+    }
+
+    post {
+        always {
+            archiveArtifacts artifacts: 'results/*.xml', allowEmptyArchive: true
+            publishRobotResults outputPath: 'results'
         }
     }
 }
