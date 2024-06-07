@@ -1,16 +1,31 @@
-# Use the official Jenkins image as the base image
-FROM jenkins/jenkins:lts
-
-# Switch to the root user to install Python
+FROM jenkins/jenkins:2.452.1-jdk17
 USER root
 
-# Update the package list and install Python
+# Install necessary dependencies
 RUN apt-get update && \
-    apt-get install -y python3 python3-pip && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get install -y lsb-release \
+                       gnupg \
+                       curl \
+                       sudo \
+                       python3-venv \
+                       python3-pip
 
-# Switch back to the jenkins user
+# Install Docker dependencies and repository
+RUN curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg && \
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
+
+# Install Docker
+RUN apt-get update && \
+    apt-get install -y docker-ce-cli
+
+# Create and activate virtual environment
+RUN python3 -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+# Install Robot Framework
+RUN pip install --upgrade pip && \
+    pip install robotframework
+
+# Install Jenkins plugins including Blue Ocean and Docker Pipeline
 USER jenkins
-
-# Print Python version to verify installation
-RUN python3 --version && pip3 --version
+RUN jenkins-plugin-cli --plugins "blueocean docker-workflow"
