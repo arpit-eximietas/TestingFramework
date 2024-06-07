@@ -30,6 +30,8 @@ pipeline {
                         subject: 'Build Status',
                         body: 'Please find the attached report file.',
                         attachmentsPattern: 'Report/HTML/report.html',
+                        attachLog: true, // Attach build log if needed,
+                        mimeType: 'text/html',
                         to: 'rhitam.bhattacharya@eximietas.design'
                     )
                 }
