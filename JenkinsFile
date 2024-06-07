@@ -5,12 +5,14 @@ pipeline {
     }
 
     stages {
-        stage('Test') {
+        stage('GIT-Checkout'){
             steps{
                 script{
                     sh('curl https://github.com/RhitamB-Eximietas/TestingFramework.git')
                 }
             }
+        }
+        stage('Test') {
             steps{
                 script{
                     sh 'docker build -t myjenkins-blueocean:2.452.1-1 .'
