@@ -8,24 +8,22 @@ RUN apt-get update && \
                        curl \
                        sudo \
                        python3-venv \
-                       python3-pip
-
-# Install Docker dependencies and repository
-RUN curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg && \
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
-
-# Install Docker
-RUN apt-get update && \
-    apt-get install -y docker-ce-cli
+                       python3-pip \
+                       nodejs \
+                       npm
 
 # Create and activate virtual environment
 RUN python3 -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
-# Install Robot Framework
+# Install Robot Framework and JSONLibrary
 RUN pip install --upgrade pip && \
-    pip install robotframework
+    pip install robotframework \
+                robotframework-jsonlibrary
 
-# Install Jenkins plugins including Blue Ocean and Docker Pipeline
+# Install Newman
+RUN npm install -g newman
+
+# Install Jenkins plugins including Blue Ocean
 USER jenkins
-RUN jenkins-plugin-cli --plugins "blueocean docker-workflow"
+RUN jenkins-plugin-cli --plugins "blueocean"
