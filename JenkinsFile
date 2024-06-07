@@ -30,7 +30,7 @@ pipeline {
                         subject: 'Build Status',
                         body: 'Please find the attached report file.',
                         attachmentsPattern: 'Report/HTML/report.html',
-                        to: 'rhitam.bhattacharya@eimietas.design'
+                        to: 'rhitam.bhattacharya@eximietas.design'
                     )
                 }
             }
