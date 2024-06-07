@@ -18,7 +18,7 @@ pipeline {
                     '''
                     echo 'Running Tests'
                     sh '''
-                    robot --outputdir results tests/
+                    robot TestingFW.robot
                     '''
                 }
             }
