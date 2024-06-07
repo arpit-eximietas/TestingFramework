@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                docker.image('ppodgorsek/robot-framework:latest').inside {
+                docker.image('robotframework/rfdocker:latest').inside {
                     sh 'robot --outputdir results tests/'
                 }
                 echo 'Checking Pre-requisites'
