@@ -1,0 +1,28 @@
+pipeline {
+    agent any
+    triggers {
+        pollSCM('* * * * *')
+    }
+
+    stages {
+        stage('Test') {
+            steps {
+                script {
+                    echo 'Checking Pre-requisites'
+                    sh '''
+                    python3 --version
+                    newman --version
+                    // pip install robotframework
+                    // pip install robotframework-jsonlibrary
+                    // npm instal -g newman
+                    robot --version
+                    '''
+                    echo 'Running Tests'
+                    sh '''
+                    robot TestingFW.robot
+                    '''
+                }
+            }
+        }
+    }
+}
