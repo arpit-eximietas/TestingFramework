@@ -23,8 +23,16 @@ pipeline {
                     newman --version
                     pip3 install robotframework --break-system-packages
                     pip3 install robotframework-jsonlibrary --break-system-packages
-                    robot TestingFW.robot                        
+                    robot TestingFW.robot  
+                    ls
+                    cd Report/HTML
                     '''
+                    emailext(
+                        subject: 'Build Status',
+                        body: 'Please find the attached report file.',
+                        attachmentsPattern: 'Report/HTML/report.html',
+                        to: 'rhitam.bhattacharya@eimietas.design'
+                    )
                 }
             }
         }
