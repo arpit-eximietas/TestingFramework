@@ -8,20 +8,18 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    docker.image('robotframework/rfdocker:latest').inside {
-                        echo 'Checking Pre-requisites'
-                        sh '''
-                        python3 --version
-                        newman --version
-                        pip install robotframework
-                        pip install robotframework-jsonlibrary
-                        robot --version
-                        '''
-                        echo 'Running Tests'
-                        sh '''
-                        robot --outputdir results tests/
-                        '''
-                    }
+                    echo 'Checking Pre-requisites'
+                    sh '''
+                    python3 --version
+                    newman --version
+                    pip install robotframework
+                    pip install robotframework-jsonlibrary
+                    robot --version
+                    '''
+                    echo 'Running Tests'
+                    sh '''
+                    robot --outputdir results tests/
+                    '''
                 }
             }
         }
