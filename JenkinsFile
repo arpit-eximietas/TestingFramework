@@ -25,6 +25,8 @@ pipeline {
                     pip3 install robotframework-jsonlibrary --break-system-packages
                     robot TestingFW.robot  
                     ls
+                    cd Report/HTML
+                    ls
                     '''
                 }
             }
