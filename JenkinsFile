@@ -8,8 +8,8 @@ pipeline {
         stage('GIT-Checkout'){
             steps{
                 script{
-                    sh'''
-                        curl https://github.com/RhitamB-Eximietas/TestingFramework.git
+                    sh '''
+                        git clone https://github.com/RhitamB-Eximietas/TestingFramework.git
                     '''
                 }
             }
@@ -30,37 +30,38 @@ pipeline {
                 }
             }
         }
-        post{
-            failure{
-                emailext(
-                    subject: "Test Failed!!",
-                    body:'''<html>
-                                <body>
-                                <p>Testing Failed</p>
-                                <p>PFA HTML and JSON report</p>
-                                </body>
-                            </html>''',
-                    to:'rhitam.bhattacharya@eximietas.design',
-                    from: 'jenkins@example.com',
-                    replyTo: 'jenkins@example.com',
-                    attachmentsPattern: 'Report/HTML/report.html, Report/JSON/newman_report.json'
-                )
-            }
-            success{
-                emailext(
-                    subject: "Test Successfull",
-                    body:'''<html>
-                                <body>
-                                <p>Testing Successfull</p>
-                                <p>PFA HTML and JSON report</p>
-                                </body>
-                            </html>''',
-                    to:'rhitam.bhattacharya@eximietas.design',
-                    from: 'jenkins@example.com',
-                    replyTo: 'jenkins@example.com',
-                    attachmentsPattern: 'Report/HTML/report.html, Report/JSON/newman_report.json'
-                )
-            }
+    }
+
+    post {
+        failure {
+            emailext(
+                subject: "Test Failed!!",
+                body:'''<html>
+                            <body>
+                            <p>Testing Failed</p>
+                            <p>PFA HTML and JSON report</p>
+                            </body>
+                        </html>''',
+                to: 'rhitam.bhattacharya@eximietas.design',
+                from: 'jenkins@example.com',
+                replyTo: 'jenkins@example.com',
+                attachmentsPattern: 'Report/HTML/report.html, Report/JSON/newman_report.json'
+            )
+        }
+        success {
+            emailext(
+                subject: "Test Successful",
+                body:'''<html>
+                            <body>
+                            <p>Testing Successful</p>
+                            <p>PFA HTML and JSON report</p>
+                            </body>
+                        </html>''',
+                to: 'rhitam.bhattacharya@eximietas.design',
+                from: 'jenkins@example.com',
+                replyTo: 'jenkins@example.com',
+                attachmentsPattern: 'Report/HTML/report.html, Report/JSON/newman_report.json'
+            )
         }
     }
 }
