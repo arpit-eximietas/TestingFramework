@@ -37,12 +37,8 @@ pipeline {
         failure {
             emailext(
                 subject: "Test Failed!!",
-                body:'''Testing Failed
-                        PFA HTML report
-                        --
-                        Thanks & Regards
-                        Testing Team Jenkins
-                        ''',
+               body:'''Testing failed
+                    Please find attached HTML and JSON report''',
                 to: 'rhitam.bhattacharya@eximietas.design',
                 from: 'jenkins@example.com',
                 replyTo: 'jenkins@example.com',
@@ -53,11 +49,7 @@ pipeline {
             emailext(
                 subject: "Test Passed!!",
                 body:'''Testing Successfull
-                        PFA HTML report
-                        --
-                        Thanks & Regards
-                        Testing Team Jenkins
-                        ''',
+                    Please find attached HTML and JSON report''',
                 to: 'rhitam.bhattacharya@eximietas.design',
                 from: 'jenkins@example.com',
                 replyTo: 'jenkins@example.com',
