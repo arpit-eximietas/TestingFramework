@@ -12,7 +12,7 @@ ${JSON_REPORT_PATH}    Report/JSON/newman_report.json
 
 *** Test Cases ***
 Run Postman Collection
-    [Documentation]    Runs the Postman collection and generates an HTML report using htmlextra reporter
+    [Documentation]    Runs the Postman collection and generates an HTML report using htmlextra reporter and a JSON report
     Run Newman    ${COLLECTION}    ${ENVIRONMENT}    ${REPORT_PATH}    ${JSON_REPORT_PATH}
 
 *** Keywords ***
