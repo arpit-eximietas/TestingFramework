@@ -49,17 +49,17 @@ pipeline {
         }
         success {
             emailext(
-                subject: "Test Successful",
-                body:'''<html>
-                            <body>
-                            <p>Testing Successful</p>
-                            <p>PFA HTML and JSON report</p>
-                            </body>
-                        </html>''',
+                subject: "Test Passed!!",
+                body:'''Testing Successfull
+                        PFA HTML report
+                        --
+                        Thanks & Regards
+                        Testing Team Jenkins
+                        ''',
                 to: 'rhitam.bhattacharya@eximietas.design',
                 from: 'jenkins@example.com',
                 replyTo: 'jenkins@example.com',
-                attachmentsPattern: 'Report/HTML/report.html, Report/JSON/newman_report.json'
+                attachmentsPattern: 'Report/HTML/report.html'
             )
         }
     }
