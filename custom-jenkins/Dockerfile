@@ -23,6 +23,7 @@ RUN pip install --upgrade pip && \
 
 # Install Newman
 RUN npm install -g newman
+RUN npm install -g newman-reporter-htmlextra
 
 # Install Jenkins plugins including Blue Ocean
 USER jenkins
