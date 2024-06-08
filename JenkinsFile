@@ -9,7 +9,7 @@ pipeline {
             steps{
                 script{
                     sh '''
-                        git clone https://github.com/RhitamB-Eximietas/TestingFramework.git
+                        curl https://github.com/RhitamB-Eximietas/TestingFramework.git
                     '''
                 }
             }
