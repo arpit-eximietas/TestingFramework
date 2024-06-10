@@ -25,6 +25,6 @@ Run Newman
     Log Many    ${result.stdout}    ${result.stderr}
     Log    Stdout: ${result.stdout}
     Log    Stderr: ${result.stderr}
-    Should Be Equal As Strings    ${result.rc}    1
+    Should Be Equal As Strings    ${result.rc}    0
     Log    Newman run completed.
     Log    Find the HTML report and JSON report in the Reports folder.
