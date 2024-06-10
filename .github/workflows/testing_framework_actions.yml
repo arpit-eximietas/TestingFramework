@@ -1,6 +1,13 @@
 # This will help run robot framework and newman in the git hub actions
 name: Testing Framework
-on: workflow_dispatch
+on: 
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch: 
 
 jobs:
   test:
