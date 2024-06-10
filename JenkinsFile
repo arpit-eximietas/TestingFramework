@@ -43,14 +43,14 @@ pipeline {
                 // Get the failure array
                 def fails = jsonObj.run?.failures ?: []
                 
-                if (fails.size() < 0) {
-                    error("Failure array length is negative, which is invalid.")
+                if (fails.size() == 0) {
+                    echo "Pipeline passed. run.failure array length is 0."
                 }
                 
                 if (fails.size() > 0) {
                     error("Pipeline failed because run.failure array length is greater than 0: ${fails.size()}")
                 } else {
-                    echo "Pipeline passed. run.failure array length is 0."
+                    error("Failure array length is negative, which is invalid.")
                 }
             }
         }
