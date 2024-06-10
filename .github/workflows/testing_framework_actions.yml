@@ -30,4 +30,52 @@ jobs:
         # Run test
       - name: Run Test
         run: robot TestingFW.robot
-      
+        # Check Test Results
+      - name: Check test results
+        id: check-results
+        run: |
+          if [ -f Report/JSON/newman_report.json ]; then
+            fails=$(jq '.run.failures | length' Report/JSON/newman_report.json)
+            if [ "$fails" -gt 0 ]; then
+              echo "Test failures found: $fails"
+              exit 1
+            else
+              echo "No test failures"
+            fi
+          else
+            echo "Report/JSON/newman_report.json not found"
+            exit 1
+          fi
+        # Send email on pass/fail
+        # On Pass
+      - name: Send email notification on success
+        if: success()
+        uses: RhitamB-Eximietas/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.SMTP_SERVER }}
+          server_port: ${{ secrets.SMTP_PORT }}
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          subject: "Build Success"
+          body: "The build has succeeded!"
+          from: ${{ secrets.SMTP_FROM }}
+          to: rhitam.bhattacharya@eximietas.design 
+          attachments: |
+            Report/HTML/report.html
+            Report/JSON/newman_report.json
+        # On Fail    
+      - name: Send email notification on failure
+        if: failure()
+        uses: RhitamB-Eximietas/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.SMTP_SERVER }}
+          server_port: ${{ secrets.SMTP_PORT }}
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          subject: "Build Failure"
+          body: "The build has failed!"
+          from: ${{ secrets.SMTP_FROM }}
+          to: rhitam.bhattacharya@eximietas.design
+          attachments: |
+            Report/HTML/report.html
+            Report/JSON/newman_report.json
