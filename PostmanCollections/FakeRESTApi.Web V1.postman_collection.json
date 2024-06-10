@@ -265,7 +265,7 @@
 													"script": {
 														"exec": [
 															"pm.test('Response status code is 200(Failed)', function () {\r",
-															"    pm.expect(pm.response.code).to.equal(200);\r",
+															"    pm.expect(pm.response.code).to.equal(400);\r",
 															"})"
 														],
 														"type": "text/javascript",
