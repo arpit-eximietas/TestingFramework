@@ -37,7 +37,7 @@ pipeline {
         always{
            script {
                 // Read the JSON file
-                def json = readFile('result.json')
+                def json = readFile('Report/JSON/newman_report.json')
                 def jsonObj = new groovy.json.JsonSlurper().parseText(json)
                 
                 // Get the failure array
