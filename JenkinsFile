@@ -41,16 +41,14 @@ pipeline {
                 def jsonObj = new groovy.json.JsonSlurper().parseText(json)
                 
                 // Get the failure array
-                def failures = jsonObj.run?.failure ?: []
+                def fails = jsonObj.run?.failures ?: [0]
                 
-                // Check if the array length is non-negative
-                if (failures.size() < 0) {
+                if (fails.size() < 0) {
                     error("Failure array length is negative, which is invalid.")
                 }
                 
-                // Assert the condition
-                if (failures.size() > 0) {
-                    error("Pipeline failed because run.failure array length is greater than 0: ${failures.size()}")
+                if (fails.size() > 0) {
+                    error("Pipeline failed because run.failure array length is greater than 0: ${fails.size()}")
                 } else {
                     echo "Pipeline passed. run.failure array length is 0."
                 }
