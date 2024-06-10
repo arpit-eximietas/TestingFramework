@@ -1,0 +1,33 @@
+# This will help run robot framework and newman in the git hub actions
+name: Testing Framework
+on: workflow_dispatch
+
+jobs:
+  test-api:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Create dir
+        run: |
+          mkdir Test
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+        # Install newman
+      - name: Install newman
+        run: |
+          npm install -g newman
+          npm install -g newman-reporter-htmlextra
+        # Install Python
+      - name: Install Python
+        uses: actions/setup-python@v5.1.0
+        # Install RobotFramework
+      - name: Install RobotFramework
+        run: |
+          pip install robotframework
+          pip install robotframework-jsonlibrary
+        # Run test
+      - name: Run Test
+        run: robot TestingFW.robot
+      
