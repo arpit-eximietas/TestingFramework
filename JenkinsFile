@@ -47,11 +47,9 @@ pipeline {
                     echo "Pipeline passed. run.failure array length is 0."
                 }
                 
-                if (fails.size() > 0) {
+                else (fails.size() > 0) {
                     error("Pipeline failed because run.failure array length is greater than 0: ${fails.size()}")
-                } else {
-                    error("Failure array length is negative, which is invalid.")
-                }
+                } 
             }
         }
         failure {
