@@ -78,10 +78,30 @@ Run Newman Tests
 
 This script runs Newman with the specified collection and environment files and generates HTML and JSON reports.
 
-## Notes
+### 6. Handling Reports in Jenkins
 
-- Ensure that the path to the Postman collection and environment files is correct.
-- Customize the `Run Process` command options as needed for your specific requirements.
-- After execution, share the generated reports with your team for analysis.
+Once the Robot Framework completes execution, two reports (HTML and JSON) are created. Jenkins can be configured to handle these reports as follows:
 
-By following these steps, you can effectively set up and utilize a testing framework for Zebra using Newman, Robot Framework, and Python.
+1. **Post-Build Actions**:
+   - Configure Jenkins to archive the generated HTML and JSON reports.
+
+2. **Email Notifications**:
+   - Set up email notifications in Jenkins to send the reports.
+   - If the test fails, Jenkins will trigger an email with the failed report.
+   - If the test passes, Jenkins will trigger an email with the passed report.
+
+Here is an example of configuring Jenkins for email notifications:
+
+- **Install Email Extension Plugin**:
+  - Go to Jenkins Dashboard -> Manage Jenkins -> Manage Plugins -> Available -> Search for "Email Extension Plugin" -> Install.
+
+- **Configure Email Notification**:
+  - Go to Jenkins Dashboard -> Manage Jenkins -> Configure System -> Extended E-mail Notification.
+  - Provide the SMTP server details and default email content.
+
+- **Add Email Notifications to Job**:
+  - In your Jenkins job configuration, add a post-build action "Editable Email Notification".
+  - Configure the trigger for "Failure" and "Success".
+  - Set the content of the email and attach the HTML and JSON reports.
+
+By following these steps, you can effectively set up and utilize a testing framework for Zebra using Newman, Robot Framework, and Python, along with Jenkins for CI/CD integration and email notifications.
