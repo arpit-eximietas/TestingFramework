@@ -41,7 +41,7 @@ pipeline {
                 to: 'rhitam.bhattacharya@eximietas.design',
                 from: 'jenkins@example.com',
                 replyTo: 'jenkins@example.com',
-                attachmentsPattern: 'Report/HTML/report.html, eport/JSON/newman_report.json'
+                attachmentsPattern: 'Report/HTML/report.html, Report/JSON/newman_report.json'
             )
         }
         success {
