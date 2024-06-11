@@ -26,15 +26,15 @@ Ensure that the CI/CD pipeline has the following pre-installed:
 1. Navigate to your local Git repository.
 2. Add the exported files.
    ```sh
-   git add <collection_file> <environment_file>
+   git add .
    ```
 3. Commit changes.
    ```sh
-   git commit -m "Add Postman collection and environment files"
+   git commit -m "feat:conventional commits"
    ```
 4. Push to Git repository.
    ```sh
-   git push origin main
+   git push origin main/<branch>
    ```
 5. Merge with the main branch if necessary.
 
@@ -69,8 +69,8 @@ Library           Process
 *** Variables ***
 ${COLLECTION}     path/to/your/postman_collection.json
 ${ENVIRONMENT}    path/to/your/postman_environment.json
-${REPORT}         newman_report.html
-${REPORT_JSON}    newman_report.json
+${REPORT}         path/to/your/newman_report.html
+${REPORT_JSON}    path/to/your/newman_report.json
 
 *** Test Cases ***
 Run Newman Tests
