@@ -36,7 +36,7 @@ jobs:
           pip install robotframework-jsonlibrary
         # Run test
       - name: Run Test
-        run: robot TestingFW.robot
+        run: robot Robot_framework/TestingFW.robot
         # Check Test Results
       - name: Check test results
         id: check-results
