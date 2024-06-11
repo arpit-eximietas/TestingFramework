@@ -8,6 +8,7 @@ Ensure that the CI/CD pipeline has the following pre-installed:
 - Newman (a CLI runner for Postman)
 - Robot Framework
 - Python
+- Node.js
 
 ## Steps
 
@@ -83,7 +84,11 @@ This script runs Newman with the specified collection and environment files and 
 Once the Robot Framework completes execution, two reports (HTML and JSON) are created. Jenkins can be configured to handle these reports as follows:
 
 1. **Post-Build Actions**:
-   - Configure Jenkins to archive the generated HTML and JSON reports.
+   - Check if the Test cases failed
+   - If any test case fails:
+      * Send an email with both the HTML and JSON files
+   - Else: 
+      * Send a successfull mail saying that the build passed successfully,attatch the HTML and JSON report
 
 2. **Email Notifications**:
    - Set up email notifications in Jenkins to send the reports.
